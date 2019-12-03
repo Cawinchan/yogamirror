@@ -1,0 +1,53 @@
+from util import (get_ordinal_score, make_vector, get_webcam, get_image, label_img)
+
+
+parser.add_argument('--input', type=str, help='Path to a video or a sequence of image.', default='yoga.mp4')
+parser.add_argument('--algo', type=str, help='Background subtraction method (KNN, MOG2).', default='KNN')
+args = parser.parse_args()
+
+if args.algo == 'MOG2':
+    backSub = cv2.createBackgroundSubtractorMOG2()
+else:
+# Custom openpose params
+params = dict()
+params['face'] = False
+params['face_net_resolution'] = '160x160'
+params['disable_blending'] = True
+params['model_folder'] = args.model_folder
+params['net_resolution'] = args.net_resolution
+params['number_people_max'] = args.number_people_max
+params['display'] = 0
+params['disable_multi_thread'] = False
+params['model_pose'] = 'BODY_25'
+
+print(time.process_time() - start)
+start = time.process_time()
+
+
+
+# Start openpose
+opWrapper = op.WrapperPython()
+opWrapper.configure(params)
+opWrapper.start()
+
+
+target = cv2.VideoCapture(args.target_video)
+
+myvideo = cv2.VideoWriter("target_skeleton.mp4", cv2.VideoWriter_fourcc(*'DIVX'), 30 \
+                          , (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PRO$
+                          False)
+complete_target_vector_map = np.empty((1,25,3))
+
+while True:
+     target_img = get_image(target, args.cam_width, args.cam_height)
+     if webcam_img is None or target_img is None:
+        continue
+     target_datum = label_img(opWrapper, target_img)
+     ordinal_score = ('', 0.0, (0, 0, 0))
+     if type(target_datum.poseKeypoints) == np.ndarray or \
+             target_datum.poseKeypoints.shape == (1, 25, 3):
+          if target_datum.poseKeypoints.shape:
+                 target_coords_vec = make_vector(target_datum.poseKeypoints)
+                 complete_target_vector_map = np.concatenate((complete_target_vector_map, target_coords_vec)) 
+
+     myvideo.write(target_datum.cvOutputData)

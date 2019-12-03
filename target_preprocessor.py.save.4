@@ -1,0 +1,55 @@
+from util import (get_ordinal_score, make_vector, get_webcam, get_image, label_img)
+import argparse 
+import cv2 
+from openpose import pyopenpose as op
+import numpy as np
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, help='Path to a video or a sequence of image.', default='test.mp4')
+parser.add_argument('--model_folder', type=str, default='../openpose/models/')
+parser.add_argument('--net_resolution', type=str, default='176x176')  #used to be 176x176
+parser.add_argument('--cam_width', type=int, default=1920) #1920 original
+parser.add_argument('--cam_height', type=int, default=1080)
+parser.add_argument('--number_people_max', type=int, default=1)
+args = parser.parse_args()
+
+target = cv2.VideoCapture(args.input)
+
+# Custom openpose params
+params = dict()
+params['disable_blending'] = False
+params['model_folder'] = args.model_folder
+params['number_people_max'] = args.number_people_max
+params['display'] = 0
+params['disable_multi_thread'] = False
+
+# Start openpose
+opWrapper = op.WrapperPython()
+opWrapper.configure(params)
+opWrapper.start()
+
+myvideo = cv2.VideoWriter("target_skeleton.mp4", cv2.VideoWriter_fourcc(*'DIVX'), 30 , (int(target.get(cv2.CAP_PROP_FRAME_WIDTH)), int(target.get(cv2.CAP_PROP_FRAME_HEIGHT))),
+                          False)
+complete_target_vector_map = np.empty((1,25,3))
+
+while True:
+     target_img = get_image(target, args.cam_width, args.cam_height)
+     if target_img is None:
+        continue
+     target_datum = label_img(opWrapper, target_img)
+     ordinal_score = ('', 0.0, (0, 0, 0))
+     if type(target_datum.poseKeypoints) == np.ndarray or \
+             target_datum.poseKeypoints.shape == (1, 25, 3):
+          if target_datum.poseKeypoints.shape:
+                 target_coords_vec = make_vector(target_datum.poseKeypoints)
+                 complete_target_vector_map = np.concatenate((complete_target_vector_map, target_coords_vec)) 
+
+     myvideo.write(target_datum.cvOutputData)
+
+
+# Clean up
+webcam.release()
+target.release()
+out.release()
+cv2.destroyAllWindows()
+
