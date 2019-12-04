@@ -16,11 +16,19 @@ from openpose import pyopenpose as op
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_folder', type=str, default='../openpose/models/')
 parser.add_argument('--target_video', type=str, default='./test.mp4')
+<<<<<<< HEAD
 parser.add_argument('--model', type=str, default='nano')
 parser.add_argument('--skeleton_video', type=str, default='./target_skeleton_real_test.mp4')
 parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
 parser.add_argument('--cam_width', type=int, default=1920) #1920 original
 parser.add_argument('--cam_height', type=int, default=1080) #1080
+=======
+parser.add_argument('--skeleton_video', type=str, default='./target_skeleton_real_test.mp4')
+parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
+parser.add_argument('--net_resolution', type=str, default='112x112')  #used to be 176x176
+parser.add_argument('--cam_width', type=int, default=1920) #1920 original
+parser.add_argument('--cam_height', type=int, default=1080) #1080 
+>>>>>>> 77365638b9709824d6489d14a071ea8a024d3248
 parser.add_argument('--number_people_max', type=int, default=1)
 
 args = parser.parse_args()
