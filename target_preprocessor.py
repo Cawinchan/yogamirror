@@ -11,7 +11,7 @@ parser.add_argument('--target_video', type=str, default='./anshiqa_yoga_debut/re
 parser.add_argument('--model_folder', type=str, default='../openpose/models/')
 parser.add_argument('--video_output', type=str, default='target_skeleton_real_test.mp4')
 parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
-parser.add_argument('--net_resolution', type=str, default='176x176')  #used to be 176x176
+parser.add_argument('--net_resolution', type=str, default='800x800')  #used to be 176x176
 parser.add_argument('--cam_width', type=int, default=1920) #1920 original
 parser.add_argument('--cam_height', type=int, default=1080)
 parser.add_argument('--number_people_max', type=int, default=1)
@@ -60,8 +60,8 @@ while True:
                  complete_target_vector_map.append(target_coords_vec) 
 
      screen_out = target_datum.cvOutputData
-     cv2.rectangle(screen_out, (10, 30), (600, 120), (255, 255, 255), 3)
-     font = cv2.FONT_HERSHEY_DUPLEX
+#     cv2.rectangle(screen_out, (10, 30), (600, 120), (255, 255, 255), 3)
+#     font = cv2.FONT_HERSHEY_DUPLEX
      out.write(screen_out)
      cv2.imshow("Webcam and Target Image", screen_out)
 

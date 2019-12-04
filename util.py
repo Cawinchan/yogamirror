@@ -70,16 +70,16 @@ def get_ordinal_score(score):
     float: transparency value
     tuple: color of overlay
     """
-    alpha = 0.2
-    overlay_color = (0, 0, 255)
+    alpha = 0.2 #0.2
+    overlay_color = (0, 0, 250)
 
-    if score > 0.552: #0.712
+    if score > 0.852: #0.712
         out = "Genius!"
-        overlay_color = (0, 255, 0)
-    elif score > 0.259: #0.412
+        overlay_color = (0, 250, 0)
+    elif score > 0.452: #0.412
         out = "Almost there!"
-        overlay_color = (255, 150, 0)
-    elif score > 0.198: #0.298
+        overlay_color = (250, 145, 0)
+    elif score > 0.298: #0.298
         out = "Nice try!"
     else:
         out = "Try harder!"
