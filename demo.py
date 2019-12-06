@@ -16,28 +16,11 @@ from openpose import pyopenpose as op
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_folder', type=str, default='../openpose/models/')
 parser.add_argument('--target_video', type=str, default='./test.mp4')
-<<<<<<< HEAD
 parser.add_argument('--skeleton_video', type=str, default='./target_skeleton_real_test.mp4')
 parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
-#parser.add_argument('--net_resolution', type=str, default='256x256')  #used to be 176x176
-#parser.add_argument('--model', type=str, default='nano')  #used to be 176x176
-parser.add_argument('--cam_width', type=int, default=1920) #1920 original
-parser.add_argument('--cam_height', type=int, default=1080) #1080 
-=======
-<<<<<<< HEAD
 parser.add_argument('--model', type=str, default='nano')
-parser.add_argument('--skeleton_video', type=str, default='./target_skeleton_real_test.mp4')
-parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
-parser.add_argument('--cam_width', type=int, default=1920) #1920 original
-parser.add_argument('--cam_height', type=int, default=1080) #1080
-=======
-parser.add_argument('--skeleton_video', type=str, default='./target_skeleton_real_test.mp4')
-parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
-parser.add_argument('--net_resolution', type=str, default='112x112')  #used to be 176x176
 parser.add_argument('--cam_width', type=int, default=1920) #1920 original
 parser.add_argument('--cam_height', type=int, default=1080) #1080 
->>>>>>> 77365638b9709824d6489d14a071ea8a024d3248
->>>>>>> bfc8ede6a182c367d634e5eb85108b6b8bef5a35
 parser.add_argument('--number_people_max', type=int, default=1)
 args = parser.parse_args()
 
@@ -45,36 +28,22 @@ if args.model == 'laptop':
    parser.add_argument('--net_resolution', type=str, default='112x112')  #used to be 176x176
 if args.model == 'desktop':
    parser.add_argument('--net_resolution', type=str, default='256x256')  #used to be 176x176
-if not args.model == 'laptop' and args.model == 'desktop':
-   parser.add_argument('--net_resolution', type=str, default='64x64')  #used to be 176x176
-args = parser.parse_args()
-
-if args.model == 'test':
-     parser.add_argument('--net_resolution', type=str, default='16x16')
-if args.model == 'laptop':
-     parser.add_argument('--net_resolution', type=str, default='112x112')
-if args.model == 'desktop':
-     parser.add_argument('--net_resolution', type=str, default='800x800')
-if args.model != 'test' and args.model != 'latop' and args.model != 'desktop':
-    parser.add_argument('--net_resolution', type=str, default='64x64')
+if not args.model == 'laptop' and not args.model == 'desktop':
+   parser.add_argument('--net_resolution', type=str, default='544x544')  #used to be 176x176
 args = parser.parse_args()
 
 # Custom openpose params
 params = dict()
 params['face'] = False
-<<<<<<< HEAD
-params['face_net_resolution'] = '160x160'
-params['output_resolution'] = '1920x1080'
-=======
+#params['output_resolution'] = '1920x1080'
 params['face_net_resolution'] = '16x16'
->>>>>>> bfc8ede6a182c367d634e5eb85108b6b8bef5a35
 params['disable_blending'] = True
 params['model_folder'] = args.model_folder
 params['net_resolution'] = args.net_resolution
 params['number_people_max'] = args.number_people_max
 params['display'] = 1
-params['disable_multi_thread'] = True
-params['model_pose'] = 'BODY_25'
+#params['disable_multi_thread'] = True
+#params['model_pose'] = 'BODY_25'
 
 # Start openpose
 opWrapper = op.WrapperPython()
@@ -117,8 +86,9 @@ while True:
         webcam_img = transform_image(video_cv(freenect.sync_get_video()[0]), args.cam_width, args.cam_height)
 #        webcam_img = transform_image(video_cv(freenect.sync_get_video()[0]), args.cam_height, args.cam_width)
  #    target_img = get_image(target, args.cam_width, args.cam_height)
-       # webcam_img = video_cv(freenect.sync_get_video()[0])
+#        webcam_img = video_cv(freenect.sync_get_video()[0])
         skeleton_img = get_image(skeleton, args.cam_width, args.cam_height)
+#        print(skeleton_img.shape)
         if webcam_img is None:
             continue
 
@@ -142,26 +112,29 @@ while True:
     #                                 skeleton_img),
     #                                 axis=1)
         # Capture frame-by-frame
-        screen_out = skeleton_img
+#        screen_out = skeleton_img
+        screen_out = webcam_datum.cvOutputData
         # Add overlay to show results
         overlay = screen_out.copy()
         cv2.rectangle(overlay, (0, 0), (args.cam_width, args.cam_height),  # previously args.cam_width // 2 now args.cam_width
                       ordinal_score[2], -1)
-        screen_out = cv2.addWeighted(overlay, ordinal_score[1],   
+        screen_out = cv2.addWeighted(overlay, ordinal_score[1],
                                      screen_out,
                                      1 - ordinal_score[1], 0,
                                      screen_out)
 
        # Add overlay to show ideal body **
-    #    overlay = target_img
+ #       overlay = cv2.Canny(skeleton_img,150,200)
+#        print(overlay.shape)
+#        overlay = webcam_datum.cvOutputData 
+        overlay = skeleton_img
     #    overlay = webcam_img
-        print(overlay.shape)
+    #    print(overlay.shape)
     #    overlay = target_datum.cvOutputData
-        overlay = webcam_datum.cvOutputData
-        screen_out = cv2.addWeighted(overlay,1 - ordinal_score[1],
-                                     screen_out,
-                                     ordinal_score[1], 0,
-                                     screen_out)
+        screen_out = cv2.addWeighted(overlay, 0.5,
+                                      screen_out,
+                                      0.5, 0,
+                                      screen_out)
 
         # Draw a vertical white line with thickness of 10 px
        # cv2.line(screen_out, (args.cam_width // 2, 0),
@@ -175,7 +148,7 @@ while True:
 
         # Record Video
     #    out.write(screen_out)
-        screen_out = crop_image(screen_out, args.cam_height, args.cam_width)
+#        screen_out = crop_image(screen_out, 1920, 1080)
 
         # Display img
         cv2.imshow("Webcam and Target Image", screen_out)
@@ -195,7 +168,7 @@ while True:
 
     # Clean up
     skeleton.release()
-    webcam.release()
+   # webcam.release()
     #target.release()
     #out.release()
     cv2.destroyAllWindows()
