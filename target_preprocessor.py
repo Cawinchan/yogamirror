@@ -7,7 +7,7 @@ import numpy as np
 import pickle
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--target_video', type=str, default='./anshiqa_yoga_debut/real_test.mp4') #'./test.mp4'
+parser.add_argument('--target_video', type=str, default='./anshiqa_yoga_debut/real_test_1.mp4') #'./test.mp4'
 parser.add_argument('--model_folder', type=str, default='../openpose/models/')
 parser.add_argument('--video_output', type=str, default='target_skeleton_real_test.mp4')
 parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')

@@ -24,7 +24,7 @@ while True:
           print(words)
           if not words:
               continue
-          if 'on' in words['alternative'][0]['transcript'] and counter == 0:
+          if 'hello' in words['alternative'][0]['transcript'] and counter == 0:
           #if True:
               system('gnome-terminal -x python3 ~/PycharmProjects/yogamirror/demo.py')
               counter += 1

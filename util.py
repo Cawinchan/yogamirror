@@ -1,3 +1,4 @@
+
 import sys
 import cv2
 import numpy as np
@@ -72,15 +73,16 @@ def get_ordinal_score(score):
     """
     alpha = 0.2 #0.2
     overlay_color = (0, 0, 250)
-
-    if score > 0.852: #0.712
+    print("score",score)
+    if score > 0.712: #0.712
         out = "Genius!"
         overlay_color = (0, 250, 0)
-    elif score > 0.452: #0.412
-        out = "Almost there!"
-        overlay_color = (250, 145, 0)
-    elif score > 0.298: #0.298
+ #   elif score > 0.500: #0.412
+ #       out = "Almost there!"
+#        overlay_color = (250, 145, 0)
+    elif score > 0.412: #0.298
         out = "Nice try!"
+        overlay_color = (250, 145, 0)
     else:
         out = "Try harder!"
 
@@ -88,19 +90,42 @@ def get_ordinal_score(score):
 
 
 def crop_image(full_image, w, h):
+
+  #  half_w = w/2
+  #  half_h = h/2
+  #  cropped_w_min = int(half_w - half_h - 150)
+  #  cropped_w_max = int(half_w + half_h  + 150)
+  #  full_image = full_image[:h,cropped_w_min:cropped_w_max]
+  #  print("before resize", full_image.shape)
     full_image = cv2.resize(full_image,
                             (w, h))
+  #  print("after resize", full_image.shape)
     #w_min = w // 2 - (w // 4)
     #w_max = w // 2 + (w // 4)
     #out = full_image[:h, w_min:w_max]
-    out = full_image
-    return out
+    return full_image
+
+def final_transform(image, w, h):
+
+    half_w = w/2
+    half_h = h/2
+    cropped_w_min = int(half_w - half_h)
+    cropped_w_max = int(half_w + half_h)
+    image = image[:h,cropped_w_min:cropped_w_max]
+#    print("before resize", image.shape)
+    final = cv2.resize(image,
+                            (h, w))
+ #   print("after resize", image.shape)
+    #w_min = w // 2 - (w // 4)
+    #w_max = w // 2 + (w // 4)
+    #out = full_image[:h, w_min:w_max]
+    return final
 
 def transform_image(img,w,h):
     transformed_image = cv2.flip(
-            crop_image(
+            cv2.resize(
                 img,
-                w, h
+                (w, h)
             ), 1)
     return transformed_image
 
@@ -128,6 +153,7 @@ def get_image(stream, w, h):
                 img_original,
                 w, h
             ), 1)
+#    img = crop_image(img_original,w,h)
 
     return img
 

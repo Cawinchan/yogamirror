@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 import time
 from keras.models import load_model
-from util import (final_transform, crop_image,get_ordinal_score, make_vector, get_webcam, get_image, label_img, video_cv, transform_image)
+from util import (crop_image,get_ordinal_score, make_vector, get_webcam, get_image, label_img, video_cv, transform_image)
 import freenect
 
 sys.path.append('/usr/local/python')
@@ -16,8 +16,7 @@ from openpose import pyopenpose as op
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_folder', type=str, default='../openpose/models/')
 parser.add_argument('--target_video', type=str, default='./test.mp4')
-parser.add_argument('--skeleton_video', type=str, default='./anshiqa_yoga_debut/real_test_1.mp4')
-#parser.add_argument('--skeleton_video', type=str, default='target_skeleton_real_test.mp4')
+parser.add_argument('--skeleton_video', type=str, default='./target_skeleton_real_test.mp4')
 parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
 parser.add_argument('--model', type=str, default='nano')
 parser.add_argument('--cam_width', type=int, default=1920) #1920 original
@@ -28,28 +27,22 @@ args = parser.parse_args()
 if args.model == 'laptop':
    parser.add_argument('--net_resolution', type=str, default='112x112')  #used to be 176x176
 if args.model == 'desktop':
-   parser.add_argument('--net_resolution', type=str, default='528x528')  #used to be 176x176
+   parser.add_argument('--net_resolution', type=str, default='256x256')  #used to be 176x176
 if not args.model == 'laptop' and not args.model == 'desktop':
-   parser.add_argument('--net_resolution', type=str, default='656x368')  #used to be 176x176
+   parser.add_argument('--net_resolution', type=str, default='544x544')  #used to be 176x176
 args = parser.parse_args()
 
 # Custom openpose params
 params = dict()
 params['face'] = False
-params['hand'] = False
-#params['body'] = 2
 #params['output_resolution'] = '1920x1080'
-#params['identification'] = True
-params['fullscreen'] = True
-#params['face_net_resolution'] = '16x16'
+params['face_net_resolution'] = '16x16'
 params['disable_blending'] = True
 params['model_folder'] = args.model_folder
 params['net_resolution'] = args.net_resolution
 params['number_people_max'] = args.number_people_max
-#params['scale_number'] = 4
-#params['scale_gap'] = 0.25
 params['display'] = 1
-params['disable_multi_thread'] = True
+#params['disable_multi_thread'] = True
 params['model_pose'] = 'BODY_25'
 
 # Start openpose
@@ -80,17 +73,12 @@ start = time.time()
 #time.sleep(2)  # delay to wait for detection ####################TAKE NOTE MIGHT NEED
 model = load_model('ComparatorNet.h5',compile=False)
 
+
 with open(args.target_vector, "rb") as fp:
      b = pickle.load(fp)
-counter = 0
-counter_len = 5
-lst = []
-average_score = 0
-current_score = 0
+
 while True:
     for vector in b:
-        counter += 1
-        print(counter)
         frames += 1
 
         # Get images
@@ -116,30 +104,7 @@ while True:
            coords_vec = make_vector(webcam_datum.poseKeypoints)
            input_vec = np.concatenate([coords_vec, vector]).flatten()
            similarity_score = model.predict(input_vec.reshape((1, -1)))
-           lst.append(similarity_score)
-           print('sim score', counter, similarity_score)
-           if counter % counter_len == 0 and counter > 0:
-                newlst = lst[counter-counter_len:counter]
-                average_score = sum(newlst)/counter_len
-                print("aavg",average_score)
-                ordinal_score = get_ordinal_score(average_score)
-                print(ordinal_score)
-                if  ordinal_score[0] == 'Genius!':
-                     current_score += 10 
-                if  ordinal_score[0] == 'Nice try!':
-                     current_score += 5
-                if  ordinal_score[0] == 'Try harder!!':
-                     current_score += 1
-                print("curreeent scoreee",current_score,ordinal_score) 
-           if counter >= counter_len:
-                  ordinal_score = get_ordinal_score(average_score)
-
-                           
-              # average_score = sum(lst)/len(lst)
-              # if average_score:
-              # print("hi")
-              # print(average_score)
-          # ordinal_score = get_ordinal_score(similarity_score)
+           ordinal_score = get_ordinal_score(similarity_score)
 
 
         # Concatenate webcam and target video
@@ -159,54 +124,39 @@ while True:
                                      screen_out)
 
        # Add overlay to show ideal body **
-#        print(screen_out.shape)
+ #       overlay = cv2.Canny(skeleton_img,150,200)
+#        print(overlay.shape)
 #        overlay = webcam_datum.cvOutputData 
         overlay = skeleton_img
- #       overlay = cv2.Canny(skeleton_img,150,200) 
     #    overlay = webcam_img
-#        print(overlay.shape)
+    #    print(overlay.shape)
     #    overlay = target_datum.cvOutputData
         screen_out = cv2.addWeighted(overlay, 0.5,
                                       screen_out,
                                       0.5, 0,
                                       screen_out)
 
- #       overlay = cv2.Canny(skeleton_img,150,200)
         # Draw a vertical white line with thickness of 10 px
        # cv2.line(screen_out, (args.cam_width // 2, 0),
        #          (args.cam_width // 2, args.cam_height),
        #          (255, 255, 255), 10)
-        screen_out = final_transform(screen_out,args.cam_width, args.cam_height)
+
         # Display comment
-        cv2.rectangle(screen_out, (60, 30), (1000, 120), (255, 255, 255), 3)
-        font = cv2.FONT_HERSHEY_TRIPLEX
-#        if not ordinal_score[0]:
-#             ordinal_score = 'Try Harder!!'
-#             print(ordinal_score[0])
-        highscore = round(current_score/(counter/200))
-      #  if highscore % 5 != 0: 
-      #          highscore += (5 - highscore % 5)
-        cv2.putText(screen_out, '  ' + ordinal_score[0], (10, 100), font, 2, (255, 15, 30), 4, cv2.LINE_AA)
-        if ordinal_score[0]:
-             cv2.putText(screen_out, '                   Score: ' + str(highscore), (10,100), font, 2,(255,15,30),4,cv2.LINE_AA)
+        cv2.rectangle(screen_out, (10, 30), (600, 120), (255, 255, 255), 3)
+        font = cv2.FONT_HERSHEY_DUPLEX
+        cv2.putText(screen_out, ' ' + ordinal_score[0], (10, 100), font, 2, (0, 0, 255), 4, cv2.LINE_AA)
 
         # Record Video
     #    out.write(screen_out)
 #        screen_out = crop_image(screen_out, 1920, 1080)
 
-       # screen_out = final_transform(screen_out,args.cam_width, args.cam_height)
         # Display img
         cv2.imshow("Webcam and Target Image", screen_out)
-#        cv2.namedWindow("Webcam and Target Image",cv2.WND_PROP_FULLSCREEN)
- #       cv2.setWindowProperty("Webcam and Target Image",cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
 
         # Check for quit
         key = cv2.waitKey(1)
         if key == ord('q'):
-            highscore = round(current_score/(counter/200))
-            if highscore % 5 != 0: 
-                highscore += (5 - highscore % 5)
-            print("Highscoreeeeeeeeeeeeeeeee",highscore)
             break
 
         # Print frame rate
