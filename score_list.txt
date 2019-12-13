@@ -1,0 +1,12 @@
+name,score
+Cawin,255
+Sahad,195
+Billy,105
+Tom,110
+Johnson,120
+Mastor,130
+Ancheeka,140
+Selinda,225
+Belinda,230
+Slindy,285
+Cindy,125

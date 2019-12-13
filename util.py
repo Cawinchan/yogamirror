@@ -28,6 +28,7 @@ def scale_transform(coords):
 
     return out, scores
 
+    
 def video_cv(video):
     """Converts video into a BGR format for display
 
@@ -75,7 +76,7 @@ def get_ordinal_score(score):
     overlay_color = (0, 0, 250)
     print("score",score)
     if score > 0.712: #0.712
-        out = "Genius!"
+        out = "Perfect!"
         overlay_color = (0, 250, 0)
  #   elif score > 0.500: #0.412
  #       out = "Almost there!"
@@ -84,19 +85,18 @@ def get_ordinal_score(score):
         out = "Nice try!"
         overlay_color = (250, 145, 0)
     else:
-        out = "Try harder!"
+        out = "Try harder!!"
 
     return out, alpha, overlay_color
 
-
 def crop_image(full_image, w, h):
 
-  #  half_w = w/2
-  #  half_h = h/2
-  #  cropped_w_min = int(half_w - half_h - 150)
-  #  cropped_w_max = int(half_w + half_h  + 150)
-  #  full_image = full_image[:h,cropped_w_min:cropped_w_max]
-  #  print("before resize", full_image.shape)
+    #half_w = w/2
+    #half_h = h/2
+    #cropped_w_min = int(half_w - half_h - 150)
+    #cropped_w_max = int(half_w + half_h  + 150)
+    #full_image = full_image[:h,cropped_w_min:cropped_w_max]
+    #print("before resize", full_image.shape)
     full_image = cv2.resize(full_image,
                             (w, h))
   #  print("after resize", full_image.shape)
@@ -105,6 +105,7 @@ def crop_image(full_image, w, h):
     #out = full_image[:h, w_min:w_max]
     return full_image
 
+    #convert 1920 x 1080
 def final_transform(image, w, h):
 
     half_w = w/2
@@ -121,6 +122,7 @@ def final_transform(image, w, h):
     #out = full_image[:h, w_min:w_max]
     return final
 
+    #resize 480 x 360 from xbox 360 
 def transform_image(img,w,h):
     transformed_image = cv2.flip(
             cv2.resize(
@@ -157,7 +159,7 @@ def get_image(stream, w, h):
 
     return img
 
-
+    # labeller of img 
 def label_img(opWrapper, img):
     datum = op.Datum()
     datum.cvInputData = img

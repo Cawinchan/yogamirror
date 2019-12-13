@@ -19,18 +19,21 @@ while True:
           # r.adjust_for_ambient_noise(source)
           print("Say something!")
        	  audio = r.listen(source)
-       	  print('Recognising audio...')
+          print('Recognising audio...')
           words = r.recognize_google(audio, language='en-IN', show_all=True)
           print(words)
           if not words:
-              continue
-          if 'hello' in words['alternative'][0]['transcript'] and counter == 0:
-          #if True:
-              system('gnome-terminal -x python3 ~/PycharmProjects/yogamirror/demo.py')
-              counter += 1
-              continue
-          if 'off' in words['alternative'][0]['transcript'] and counter != 0:
-              call(['killall', 'python3'])
-              counter = 0
-          if 'pause' in words['alternative'][0]['transcript'] and counter != 0:
-              continue
+                continue
+          if 'hello' in words['alternative'][0]['transcript'] or 'Hello' in words['alternative'][0]['transcript'] and counter == 0:
+                system('gnome-terminal -x python3 ~/PycharmProjects/yogamirror/demo.py')
+                counter += 1
+                continue
+          if 'off' in words['alternative'][0]['transcript'] or 'Off' in words['alternative'][0]['transcript'] and counter != 0:
+                call(['killall', 'python3'])
+                counter = 0
+                continue  
+          if 'pause' in words and counter != 0:
+                continue
+
+#           if 'off' in words['alternative'][0]['transcript'] or 'Off' in words[$
+

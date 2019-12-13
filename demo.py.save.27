@@ -1,0 +1,37 @@
+
+from subprocess import call
+import signal
+import pickle
+from os import system
+from playsound import playsound
+from PyQt5.QtWidgets import QMainWindow, QApplication
+import sys
+from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush,QColor,QFont
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import QSize, QTimer
+from PyQt5 import QtCore
+import numpy as np
+import pandas as pd
+from scoreGUI import App
+import sys
+import cv2
+import argparse
+import numpy as np
+import time
+from keras.models import load_model
+from util import (final_transform, crop_image,get_ordinal_score, make_vector, get_webcam, get_image, label_img, video_cv, transform_image)
+import freenect
+
+sys.path.append('/usr/local/python')
+
+from openpose import pyopenpose as op
+
+signal.signal(signal.SIGINT,signal.SIG_DFL)
+#Back straighten 1000 - 1100
+#keep back straight 1550 - 1600
+
+#align heels 1900 - 2000
+
+#elbow straighten 2213
+
+#good form 2468 - 2619 

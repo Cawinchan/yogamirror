@@ -1,0 +1,119 @@
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back.py", line 2, in <module>
+    playsound('back.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/align_heels.py", line 2, in <module>
+    playsound('align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back.py", line 2, in <module>
+    playsound('back.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back.py", line 2, in <module>
+    playsound('back.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/align_heels.py", line 2, in <module>
+    playsound('align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/back_strt.py", line 2, in <module>
+    playsound('back_strt.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/align_heels.py", line 2, in <module>
+    playsound('align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+python3: can't open file './align_heels.py': [Errno 2] No such file or directory
+python3: can't open file './align_heels.py': [Errno 2] No such file or directory
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/align_heels.py", line 2, in <module>
+    playsound('align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+python3: can't open file 'home/catop/PycharmProjects/yogamirror/sounds/align_heels.py': [Errno 2] No such file or directory
+python3: can't open file 'u': [Errno 2] No such file or directory
+python3: can't open file 'home/catop/PycharmProjects/yogamirror/sounds/align_heels.py': [Errno 2] No such file or directory
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/align_heels.py", line 2, in <module>
+    playsound('align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "./sounds/align_heels.py", line 2, in <module>
+    playsound('align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "./sounds/align_heels.py", line 2, in <module>
+    playsound('./align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
+Traceback (most recent call last):
+  File "/home/catop/PycharmProjects/yogamirror/sounds/align_heels.py", line 2, in <module>
+    playsound('./align_heels.m4a')
+  File "/home/catop/.local/lib/python3.5/site-packages/playsound.py", line 106, in _playsoundNix
+    "playbin.set_state returned " + repr(set_result))
+playsound.PlaysoundException: playbin.set_state returned <enum GST_STATE_CHANGE_FAILURE of type Gst.StateChangeReturn>
