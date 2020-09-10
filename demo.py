@@ -159,7 +159,7 @@ while True:
            # records previous similiarities
            lst.append(similarity_score)
              
-           print('recordede sim score', counter, similarity_score, lst)
+           print('recordede sim score', counter, similarity_score)
            
            # Use modulus to find the frames in multiples of 5 and then find an average of the last 5 frames
            if counter % counter_len == 0 and counter > 0:

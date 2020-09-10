@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--target_video', type=str, default='./anshiqa_yoga_debut/yoga_vid_new_1.mp4') #'./test.mp4'
 parser.add_argument('--model_folder', type=str, default='../openpose/models/')
 parser.add_argument('--video_output', type=str, default='target_skeleton_real_test.mp4')
-parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map_test.txt')
+parser.add_argument('--target_vector', type=str, default='./complete_target_vector_map.txt')
 parser.add_argument('--net_resolution', type=str, default='656x368')  #used to be 176x176
 parser.add_argument('--cam_width', type=int, default=1920) #1920 original
 parser.add_argument('--cam_height', type=int, default=1080)
